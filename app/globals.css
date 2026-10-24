@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* Layout: fixed left rail of implementation stages, dense working canvas on warm paper.
+   Color is reserved for state; ink-black is the only action color. */
+:root {
+  --canvas: #f7f6f3;
+  --surface: #ffffff;
+  --surface-2: #fbfbfa;
+  --line: #e9e8e4;
+  --line-strong: #d9d7d1;
+  --ink: #23272a;
+  --ink-strong: #111111;
+  --muted: #74726d;
+  --action: #111111;
+  --action-fg: #ffffff;
+  --action-hover: #33363a;
+  --focus: #1f6c9f;
+
+  --ok-bg: #edf3ec;
+  --ok-fg: #346538;
+  --warn-bg: #fbf3db;
+  --warn-fg: #8a5c00;
+  --err-bg: #fdebec;
+  --err-fg: #9f2f2d;
+  --info-bg: #e1f3fe;
+  --info-fg: #1f6c9f;
+  --neutral-bg: #f0efec;
+  --neutral-fg: #5d5b56;
+
+  --chart-1: #2f3437;
+  --chart-2: #1f6c9f;
+  --chart-3: #b98a2f;
+  --chart-4: #9f2f2d;
+  --chart-grid: #ecebe7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --canvas: #141413;
+    --surface: #1b1b1a;
+    --surface-2: #20201f;
+    --line: #2d2d2b;
+    --line-strong: #3a3a37;
+    --ink: #e6e4df;
+    --ink-strong: #f5f4f0;
+    --muted: #9c9a94;
+    --action: #f1efe9;
+    --action-fg: #141413;
+    --action-hover: #d8d6cf;
+    --focus: #7cc0ef;
+    --ok-bg: #1f2b20;
+    --ok-fg: #8fc493;
+    --warn-bg: #2e2715;
+    --warn-fg: #e3be6a;
+    --err-bg: #331e1e;
+    --err-fg: #f0a19f;
+    --info-bg: #182a36;
+    --info-fg: #8cc8ef;
+    --neutral-bg: #262624;
+    --neutral-fg: #b3b1ab;
+    --chart-1: #d9d6cf;
+    --chart-2: #7cc0ef;
+    --chart-3: #e3be6a;
+    --chart-4: #f0a19f;
+    --chart-grid: #2a2a28;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --canvas: #141413;
+  --surface: #1b1b1a;
+  --surface-2: #20201f;
+  --line: #2d2d2b;
+  --line-strong: #3a3a37;
+  --ink: #e6e4df;
+  --ink-strong: #f5f4f0;
+  --muted: #9c9a94;
+  --action: #f1efe9;
+  --action-fg: #141413;
+  --action-hover: #d8d6cf;
+  --focus: #7cc0ef;
+  --ok-bg: #1f2b20;
+  --ok-fg: #8fc493;
+  --warn-bg: #2e2715;
+  --warn-fg: #e3be6a;
+  --err-bg: #331e1e;
+  --err-fg: #f0a19f;
+  --info-bg: #182a36;
+  --info-fg: #8cc8ef;
+  --neutral-bg: #262624;
+  --neutral-fg: #b3b1ab;
+  --chart-1: #d9d6cf;
+  --chart-2: #7cc0ef;
+  --chart-3: #e3be6a;
+  --chart-4: #f0a19f;
+  --chart-grid: #2a2a28;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
+  --color-muted: var(--muted);
+  --color-action: var(--action);
+  --color-action-fg: var(--action-fg);
+  --color-action-hover: var(--action-hover);
+  --color-focus: var(--focus);
+  --color-ok-bg: var(--ok-bg);
+  --color-ok-fg: var(--ok-fg);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-fg: var(--warn-fg);
+  --color-err-bg: var(--err-bg);
+  --color-err-fg: var(--err-fg);
+  --color-info-bg: var(--info-bg);
+  --color-info-fg: var(--info-fg);
+  --color-neutral-bg: var(--neutral-bg);
+  --color-neutral-fg: var(--neutral-fg);
+  --font-sans: var(--font-geist-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), "SF Mono", Menlo, monospace;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  color: var(--ink-strong);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.label-caps {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: enter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .pulse-dot {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+}
+@keyframes enter {
+  from {
+    opacity: 0.001;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
